@@ -21,11 +21,11 @@ export default function Progress7({ onNext }: Progress7Props) {
           <li>
             The tutor will guide you through examples and give you practice.
           </li>
-          <li>Engage actively and don't hesitate to ask questions.</li>
+          <li>Engage actively and don&apos;t hesitate to ask questions.</li>
         </p> */}
         <p>
-          We'd love to know what you thought about this tutorial. How helpful
-          was the AI tutor in improving your critical thinking skills?
+          We&apos;d love to know what you thought about this tutorial. How
+          helpful was the AI tutor in improving your critical thinking skills?
         </p>
 
         <Pagination className="my-1" total={5} />

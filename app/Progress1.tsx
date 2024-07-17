@@ -10,9 +10,9 @@ export default function Progress1({ onNext }: Progress1Props) {
         Welcome to the Critical Thinking Tutor
       </p>
       <p className="m-1">
-        In this 15-minute session, you'll improve your ability to identify
+        In this 15-minute session, you will improve your ability to identify
         underlying assumptions in arguments. This is a crucial skill for
-        critical thinking. You'll take a short pre-test, engage with an AI
+        critical thinking. You will take a short pre-test, engage with an AI
         tutor, and then take a post-test to measure your improvement. Ready to
         sharpen your critical thinking skills?
       </p>

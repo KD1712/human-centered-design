@@ -10,14 +10,14 @@ export default function Progress3({ onNext }: Progress3Props) {
       <p className="font-semibold text-xl m-1">Meet Your AI Tutor</p>
       <div className="m-4 ">
         <p className="">
-          You're about to start a conversation with an AI tutor about
-          identifying underlying assumptions in arguments. Here's what to
+          You&apos;re about to start a conversation with an AI tutor about
+          identifying underlying assumptions in arguments. Here&apos;s what to
           expect:
           <li>The session will last about 9 minutes.</li>
           <li>
             The tutor will guide you through examples and give you practice.
           </li>
-          <li>Engage actively and don't hesitate to ask questions.</li>
+          <li>Engage actively and don&apos;t hesitate to ask questions.</li>
         </p>
         <p className="m-x-2">
           Remember, identifying assumptions is about recognizing unstated

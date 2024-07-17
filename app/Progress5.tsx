@@ -25,12 +25,12 @@ export default function Progress5({ onNext }: Progress5Props) {
       </p>
       <div className="m-2">
         <p>
-          Great job working with the AI tutor! Now, let's see how you've
-          improved. Answer the following questions:
+          Great job working with the AI tutor! Now, let&apos;s see how
+          you&apos;ve improved. Answer the following questions:
         </p>
         <p className="font-semibold text-base">
-          1. "We should make all public transportation free to reduce carbon
-          emissions." Which assumption underlies this argument?
+          1. &quot;We should make all public transportation free to reduce
+          carbon emissions.&quot; Which assumption underlies this argument?
         </p>
         <RadioGroup value={question1} onChange={handleQuestion1Change}>
           <Radio value="Public transportation is currently too expensive for most people.">
@@ -50,8 +50,8 @@ export default function Progress5({ onNext }: Progress5Props) {
       </div>
       <div className="m-2">
         <p className="font-semibold text-base">
-          2. "Violent video games should be banned because they lead to
-          aggressive behavior." Which assumption is being made?
+          2. &quot;Violent video games should be banned because they lead to
+          aggressive behavior.&quot; Which assumption is being made?
         </p>
         <RadioGroup value={question2} onChange={handleQuestion2Change}>
           <Radio value="All video games are violent.">
@@ -72,9 +72,10 @@ export default function Progress5({ onNext }: Progress5Props) {
 
       <div className="m-4">
         <p className="font-semibold text-base">
-          Short Answer Question: "Companies should allow employees to work from
-          home because it increases productivity." Identify one underlying
-          assumption in this statement and briefly explain your reasoning.
+          Short Answer Question: &quot;Companies should allow employees to work
+          from home because it increases productivity.&quot; Identify one
+          underlying assumption in this statement and briefly explain your
+          reasoning.
         </p>
       </div>
       <Textarea className="my-2" label="Type here..." />

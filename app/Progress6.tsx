@@ -13,7 +13,7 @@ export default function Progress6({ onNext }: Progress6Props) {
           Congratulations on completing the critical thinking tutorial!
           <li>Pre-test score: 0 out of 5</li>
           <li>Post-test score: 0 out of 5</li>
-          You've improved your score by NaN%!
+          You&apos;ve improved your score by NaN%!
         </p>
         <p className="m-x-2">
           Remember, identifying underlying assumptions is a skill that improves

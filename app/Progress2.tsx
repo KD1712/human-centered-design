@@ -26,12 +26,13 @@ export default function Progress2({ onNext }: Progress2Props) {
       </p>
       <div className="m-2">
         <p>
-          Answer the following questions to the best of your ability. Don't
-          worry if you're not sure - this is just to establish a starting point.
+          Answer the following questions to the best of your ability. Don&apos;t
+          worry if you&apos;re not sure - this is just to establish a starting
+          point.
         </p>
         <p className="font-semibold text-base">
-          1. "We should invest more in renewable energy because it will create
-          jobs." Which assumption underlies this argument?
+          1. &quot;We should invest more in renewable energy because it will
+          create jobs.&quot; Which assumption underlies this argument?
         </p>
         <RadioGroup value={question1} onChange={handleQuestion1Change}>
           <Radio value="Renewable energy is more efficient than other energy sources.">
@@ -50,8 +51,8 @@ export default function Progress2({ onNext }: Progress2Props) {
       </div>
       <div className="m-2">
         <p className="font-semibold text-base">
-          2. "Students who eat breakfast perform better in school, so all
-          schools should provide free breakfast." Which assumption is being
+          2. &quot;Students who eat breakfast perform better in school, so all
+          schools should provide free breakfast.&quot; Which assumption is being
           made?
         </p>
         <RadioGroup value={question2} onChange={handleQuestion2Change}>
@@ -72,10 +73,10 @@ export default function Progress2({ onNext }: Progress2Props) {
 
       <div className="m-4">
         <p className="font-semibold text-base">
-          Short Answer Question: "The government should lower the voting age to
-          16 because young people are affected by political decisions." Identify
-          one underlying assumption in this statement and briefly explain your
-          reasoning.
+          Short Answer Question: &quot;The government should lower the voting
+          age to 16 because young people are affected by political
+          decisions.&quot; Identify one underlying assumption in this statement
+          and briefly explain your reasoning.
         </p>
       </div>
       <Textarea className="my-2" label="Type here..." />
