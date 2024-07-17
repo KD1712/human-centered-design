@@ -20,7 +20,7 @@ export default function App() {
   };
   return (
     <Card className="w-full max-w-[900px] mx-auto">
-      <CardHeader className="bg-blue-400 min-w-screen font-bold text-2xl">
+      <CardHeader className="bg-blue-400 min-w-screen font-bold text-white text-2xl">
         Critical Thinking Tutor
       </CardHeader>
       <CardBody className="w-[850px]">
