@@ -100,6 +100,7 @@ export default function Progress4({ onNext }: Progress4Props) {
       </div>
       <Card className="flex flex-col text-center m-4">
         <CardBody className="h-[300px] overflow-y-auto">
+          <p className="font-bold">Your Conversation...</p>
           {messages.map((message, index) => (
             <div key={index}>
               {message.type === "question" ? (
