@@ -99,8 +99,14 @@ export default function Progress4({ onNext }: Progress4Props) {
         <p>Topic: Identifying Underlying Assumptions</p>
       </div>
       <Card className="flex flex-col text-center m-4">
+        <div className="flex flex-row items-center">
+          {" "}
+          <p className="font-bold my-2 mx-4">Your Conversation...</p>
+          {loading && (
+            <div className="w-4 h-4 border-2 border-t-2 border-t-transparent border-blue-500 rounded-full animate-spin"></div>
+          )}
+        </div>
         <CardBody className="h-[300px] overflow-y-auto">
-          <p className="font-bold">Your Conversation...</p>
           {messages.map((message, index) => (
             <div key={index}>
               {message.type === "question" ? (
@@ -116,8 +122,10 @@ export default function Progress4({ onNext }: Progress4Props) {
             </div>
           ))}
         </CardBody>
-        <div className="flex flex-row gap-1 p-1  items-center">
+
+        <div className="flex flex-row gap-1 p-1 items-center">
           <Textarea
+            fullWidth={true}
             placeholder="Enter your msg"
             value={userMsg}
             onChange={(e) => setUserMsg(e.target.value)}
