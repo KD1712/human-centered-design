@@ -128,10 +128,10 @@ export default function Progress4({ onNext }: Progress4Props) {
                 </div>
               ) : (
                 <div className="bg-gray-200 my-1 p-1 rounded">
+                  <div ref={messagesEndRef} />
                   <strong>AI:</strong> {message.text}
                 </div>
               )}
-              <div ref={messagesEndRef} />
             </div>
           ))}
         </CardBody>
