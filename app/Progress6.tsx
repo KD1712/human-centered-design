@@ -8,14 +8,16 @@ export default function Progress6({ onNext }: Progress6Props) {
   return (
     <div>
       <p className="font-semibold text-xl m-1">Your Progress</p>
-      <div className="m-2">
-        <p className="my-2">
+      <div className="my-1 mx-1">
+        <p>
           Congratulations on completing the critical thinking tutorial!
-          <li>Pre-test score: 0 out of 5</li>
-          <li>Post-test score: 0 out of 5</li>
           You&apos;ve improved your score by NaN%!
         </p>
-        <p className="m-x-2">
+        <ul className="list-disc list-outside mx-4 my-1">
+          <li>Pre-test score: 0 out of 5</li>
+          <li>Post-test score: 0 out of 5</li>
+        </ul>
+        <p>
           Remember, identifying underlying assumptions is a skill that improves
           with practice. Keep questioning the unstated beliefs in arguments you
           encounter daily.
@@ -23,13 +25,13 @@ export default function Progress6({ onNext }: Progress6Props) {
       </div>
 
       <Button
-        className="bg-blue-400 text-white font-medium gap-x-px"
+        className="bg-blue-400 text-white font-medium m-1"
         onClick={onNext}
       >
         Finish
         <p className="material-symbols-outlined">chevron_right</p>
       </Button>
-      <div className="flex flex-row my-2">
+      <div className="flex flex-row my-2 mx-1">
         <span className="material-symbols-outlined">info</span>
         <p>Progress: 6/7</p>
       </div>

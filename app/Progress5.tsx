@@ -23,12 +23,12 @@ export default function Progress5({ onNext }: Progress5Props) {
       <p className="font-semibold text-xl m-1">
         Post-test: Identifying Underlying Assumptions
       </p>
-      <div className="m-2">
+      <div className="my-2 mx-1">
         <p>
           Great job working with the AI tutor! Now, let&apos;s see how
           you&apos;ve improved. Answer the following questions:
         </p>
-        <p className="font-semibold text-base">
+        <p className="font-semibold text-base my-1">
           1. &quot;We should make all public transportation free to reduce
           carbon emissions.&quot; Which assumption underlies this argument?
         </p>
@@ -48,7 +48,7 @@ export default function Progress5({ onNext }: Progress5Props) {
           </Radio>
         </RadioGroup>
       </div>
-      <div className="m-2">
+      <div className="m-1">
         <p className="font-semibold text-base">
           2. &quot;Violent video games should be banned because they lead to
           aggressive behavior.&quot; Which assumption is being made?
@@ -70,7 +70,7 @@ export default function Progress5({ onNext }: Progress5Props) {
         </RadioGroup>
       </div>
 
-      <div className="m-4">
+      <div className="my-4 mx-1">
         <p className="font-semibold text-base">
           Short Answer Question: &quot;Companies should allow employees to work
           from home because it increases productivity.&quot; Identify one
@@ -78,15 +78,15 @@ export default function Progress5({ onNext }: Progress5Props) {
           reasoning.
         </p>
       </div>
-      <Textarea className="my-2" label="Type here..." />
+      <Textarea className="my-2 mx-1" label="Type here..." />
       <Button
-        className="bg-blue-400 text-white font-medium gap-x-px"
+        className="bg-blue-400 text-white font-medium mx-1"
         onClick={onNext}
       >
         Submit Post-Test
         <p className="material-symbols-outlined">chevron_right</p>
       </Button>
-      <div className="flex flex-row my-2">
+      <div className="flex flex-row my-2 mx-1">
         <span className="material-symbols-outlined">info</span>
         <p>Progress: 5/7</p>
       </div>

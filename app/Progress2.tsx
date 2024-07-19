@@ -24,13 +24,13 @@ export default function Progress2({ onNext }: Progress2Props) {
       <p className="font-semibold text-xl m-1">
         Pre-test: Identifying Underlying Assumptions
       </p>
-      <div className="m-2">
+      <div className="mx-1 my-2">
         <p>
           Answer the following questions to the best of your ability. Don&apos;t
           worry if you&apos;re not sure - this is just to establish a starting
           point.
         </p>
-        <p className="font-semibold text-base">
+        <p className="font-semibold text-base my-1">
           1. &quot;We should invest more in renewable energy because it will
           create jobs.&quot; Which assumption underlies this argument?
         </p>
@@ -49,7 +49,7 @@ export default function Progress2({ onNext }: Progress2Props) {
           </Radio>
         </RadioGroup>
       </div>
-      <div className="m-2">
+      <div className="m-1">
         <p className="font-semibold text-base">
           2. &quot;Students who eat breakfast perform better in school, so all
           schools should provide free breakfast.&quot; Which assumption is being
@@ -71,7 +71,7 @@ export default function Progress2({ onNext }: Progress2Props) {
         </RadioGroup>
       </div>
 
-      <div className="m-4">
+      <div className="my-4 mx-1">
         <p className="font-semibold text-base">
           Short Answer Question: &quot;The government should lower the voting
           age to 16 because young people are affected by political
@@ -79,15 +79,15 @@ export default function Progress2({ onNext }: Progress2Props) {
           and briefly explain your reasoning.
         </p>
       </div>
-      <Textarea className="my-2" label="Type here..." />
+      <Textarea className="my-2 mx-1" label="Type here..." />
       <Button
-        className="bg-blue-400 text-white font-medium gap-x-px"
+        className="bg-blue-400 text-white font-medium gap-x-px mx-1"
         onClick={onNext}
       >
         Submit Pre-Test
         <p className="material-symbols-outlined">chevron_right</p>
       </Button>
-      <div className="flex flex-row my-2">
+      <div className="flex flex-row my-2 mx-1">
         <span className="material-symbols-outlined">info</span>
         <p>Progress: 2/7</p>
       </div>

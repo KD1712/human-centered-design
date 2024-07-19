@@ -1,12 +1,4 @@
-import {
-  Button,
-  Card,
-  CardBody,
-  Radio,
-  RadioGroup,
-  Textarea,
-} from "@nextui-org/react";
-import { FullPageChat } from "flowise-embed-react";
+import { Button, Card, CardBody, Textarea } from "@nextui-org/react";
 import { useEffect, useState, useRef } from "react";
 
 interface Progress4Props {
@@ -42,7 +34,7 @@ const Timer: React.FC<{ onNext: () => void }> = ({ onNext }) => {
     return `${minutes}:${seconds < 10 ? "0" + seconds : seconds}`;
   };
 
-  return <span>{formatTime(seconds)}</span>;
+  return <span className="font-semibold">{formatTime(seconds)}</span>;
 };
 
 export default function Progress4({ onNext }: Progress4Props) {
@@ -72,36 +64,57 @@ export default function Progress4({ onNext }: Progress4Props) {
     const result = await response.json();
     return result;
   }
-  const handleQuery = () => {
+  const handleQuery = async () => {
     setLoading(true);
-    query({ question: userMsg })
-      .then((response) => {
-        setMessages((prevMessages) => [
-          ...prevMessages,
-          { type: "question", text: userMsg },
-          { type: "response", text: response.text },
-        ]);
-        setUserMsg("");
-        setLoading(false);
-      })
-      .catch((error) => {
-        setLoading(false);
-        console.log(error);
-      });
+    try {
+      const responseText = await fetchGPTResponse(userMsg);
+      setMessages((prevMessages) => [
+        ...prevMessages,
+        { type: "question", text: userMsg },
+        { type: "response", text: responseText },
+      ]);
+      setUserMsg("");
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const fetchGPTResponse = async (prompt: string) => {
+    const apiKey = process.env.NEXT_PUBLIC_OPEN_API_KEY;
+    const response = await fetch("https://api.openai.com/v1/chat/completions", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${apiKey}`,
+      },
+      body: JSON.stringify({
+        model: "gpt-4",
+        messages: [{ role: "user", content: prompt }],
+      }),
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to fetch response from OpenAI");
+    }
+
+    const data = await response.json();
+    console.log(data);
+    return data.choices[0].message.content;
   };
 
   return (
     <div>
-      <p className="font-semibold text-xl m-1">
-        AI Tutor Conversation <Timer onNext={onNext} />
-      </p>
-      <div className="m-4 ">
-        <p>Topic: Identifying Underlying Assumptions</p>
+      <p className="font-semibold text-xl m-1">AI Tutor Conversation</p>
+      <div className="m-1 flex flex-row gap-1 bg-blue-100 rounded-md justify-between p-1">
+        <p>Topic: Identifying Underlying Assumptions</p>{" "}
+        <Timer onNext={onNext} />
       </div>
-      <Card className="flex flex-col text-center m-4">
+      <Card className="flex flex-col text-center my-2">
         <div className="flex flex-row items-center">
           {" "}
-          <p className="font-bold my-2 mx-4">Your Conversation...</p>
+          <p className="font-bold m-2">Your Conversation...</p>
           {loading && (
             <div className="w-4 h-4 border-2 border-t-2 border-t-transparent border-blue-500 rounded-full animate-spin"></div>
           )}
@@ -110,11 +123,11 @@ export default function Progress4({ onNext }: Progress4Props) {
           {messages.map((message, index) => (
             <div key={index}>
               {message.type === "question" ? (
-                <div className="bg-blue-100 my-1 p-1 rounded">
+                <div className="bg-gray-200 my-1 p-1 rounded">
                   <strong>User:</strong> {message.text}
                 </div>
               ) : (
-                <div className="bg-blue-100 my-1 p-1 rounded">
+                <div className="bg-gray-200 my-1 p-1 rounded">
                   <strong>AI:</strong> {message.text}
                 </div>
               )}
@@ -123,7 +136,7 @@ export default function Progress4({ onNext }: Progress4Props) {
           ))}
         </CardBody>
 
-        <div className="flex flex-row gap-1 p-1 items-center">
+        <div className="flex flex-row gap-1 items-center m-1">
           <Textarea
             fullWidth={true}
             placeholder="Enter your msg"
@@ -143,6 +156,7 @@ export default function Progress4({ onNext }: Progress4Props) {
             <Button
               className="bg-blue-400 text-white font-medium gap-x-px"
               onClick={handleQuery}
+              // onClick={fetchGPTResponse(userMsg)}
             >
               Send
               <p className="material-symbols-outlined">send</p>
