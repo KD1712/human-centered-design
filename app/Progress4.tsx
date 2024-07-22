@@ -34,7 +34,11 @@ const Timer: React.FC<{ onNext: () => void }> = ({ onNext }) => {
     return `${minutes}:${seconds < 10 ? "0" + seconds : seconds}`;
   };
 
-  return <span className="font-semibold">{formatTime(seconds)}</span>;
+  return (
+    <p className="flex align-middle justify-center font-semibold">
+      {formatTime(seconds)}
+    </p>
+  );
 };
 
 export default function Progress4({ onNext }: Progress4Props) {
@@ -107,7 +111,7 @@ export default function Progress4({ onNext }: Progress4Props) {
   return (
     <div>
       <p className="font-semibold text-xl m-1">AI Tutor Conversation</p>
-      <div className="m-1 flex flex-row gap-1 bg-blue-100 rounded-md justify-between p-2">
+      <div className="m-1 flex flex-row gap-1 bg-blue-100 align-middle items-center rounded-md justify-between p-2">
         <p>Topic: Identifying Underlying Assumptions</p>{" "}
         <Timer onNext={onNext} />
       </div>

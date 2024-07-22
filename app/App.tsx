@@ -35,12 +35,14 @@ export default function App() {
             {currentProgress === 7 && <Progress7 onNext={handleNext} />}
           </CardBody>
         </Card>
-        <div className="flex flex-row items-center m-2 rounded-none border-transparent w-full max-w-[850px] bg-transparent text-[#6d6d6d] gap-2 text-xs md:text-sm lg:text-base">
-          <span className="material-symbols-outlined">info</span>
-          <p className="text-sm md:text-sm lg:text-base">
-            Progress: {currentProgress}/7
-          </p>
-        </div>
+        {currentProgress != 7 && (
+          <div className="flex flex-row items-center m-2 rounded-none border-transparent w-full max-w-[850px] bg-transparent text-[#6d6d6d] gap-2 text-xs md:text-sm lg:text-base">
+            <span className="material-symbols-outlined">info</span>
+            <p className="text-sm md:text-sm lg:text-base">
+              Progress: {currentProgress}/7
+            </p>
+          </div>
+        )}
       </div>
     </div>
   );
