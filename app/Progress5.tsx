@@ -19,16 +19,16 @@ export default function Progress5({ onNext }: Progress5Props) {
     setQuestion2(event.target.value);
   };
   return (
-    <div>
+    <div className="flex flex-col gap-2 items-start">
       <p className="font-semibold text-xl m-1">
         Post-test: Identifying Underlying Assumptions
       </p>
-      <div className="my-2 mx-1">
-        <p>
+      <div className="m-1">
+        <p className="mb-2">
           Great job working with the AI tutor! Now, let&apos;s see how
           you&apos;ve improved. Answer the following questions:
         </p>
-        <p className="font-semibold text-base my-1">
+        <p className="font-semibold text-base mb-2">
           1. &quot;We should make all public transportation free to reduce
           carbon emissions.&quot; Which assumption underlies this argument?
         </p>
@@ -48,8 +48,8 @@ export default function Progress5({ onNext }: Progress5Props) {
           </Radio>
         </RadioGroup>
       </div>
-      <div className="m-1">
-        <p className="font-semibold text-base">
+      <div className="m-2">
+        <p className="font-semibold text-base mb-2">
           2. &quot;Violent video games should be banned because they lead to
           aggressive behavior.&quot; Which assumption is being made?
         </p>
@@ -70,15 +70,19 @@ export default function Progress5({ onNext }: Progress5Props) {
         </RadioGroup>
       </div>
 
-      <div className="my-4 mx-1">
-        <p className="font-semibold text-base">
-          Short Answer Question: &quot;Companies should allow employees to work
-          from home because it increases productivity.&quot; Identify one
-          underlying assumption in this statement and briefly explain your
-          reasoning.
+      <div className="my-2 mx-1 flex flex-col gap-2">
+        <p className="text-base">Short Answer Question: </p>
+        <p>
+          &quot;Companies should allow employees to work from home because it
+          increases productivity.&quot;
+        </p>
+        <p>
+          {" "}
+          Identify one underlying assumption in this statement and briefly
+          explain your reasoning.
         </p>
       </div>
-      <Textarea className="my-2 mx-1" label="Type here..." />
+      <Textarea className="my-2 mr-2" label="Type here..." />
       <Button
         className="bg-blue-400 text-white font-medium mx-1"
         onClick={onNext}
@@ -86,10 +90,10 @@ export default function Progress5({ onNext }: Progress5Props) {
         Submit Post-Test
         <p className="material-symbols-outlined">chevron_right</p>
       </Button>
-      <div className="flex flex-row my-2 mx-1">
+      {/* <div className="flex flex-row my-2 mx-1">
         <span className="material-symbols-outlined">info</span>
         <p>Progress: 5/7</p>
-      </div>
+      </div> */}
     </div>
   );
 }

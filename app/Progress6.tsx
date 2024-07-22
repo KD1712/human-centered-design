@@ -13,7 +13,7 @@ export default function Progress6({ onNext }: Progress6Props) {
           Congratulations on completing the critical thinking tutorial!
           You&apos;ve improved your score by NaN%!
         </p>
-        <ul className="list-disc list-outside mx-4 my-1">
+        <ul className="list-disc list-outside mx-4 my-3">
           <li>Pre-test score: 0 out of 5</li>
           <li>Post-test score: 0 out of 5</li>
         </ul>
@@ -31,10 +31,10 @@ export default function Progress6({ onNext }: Progress6Props) {
         Finish
         <p className="material-symbols-outlined">chevron_right</p>
       </Button>
-      <div className="flex flex-row my-2 mx-1">
+      {/* <div className="flex flex-row my-2 mx-1">
         <span className="material-symbols-outlined">info</span>
         <p>Progress: 6/7</p>
-      </div>
+      </div> */}
     </div>
   );
 }

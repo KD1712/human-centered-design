@@ -14,14 +14,14 @@ export default function Progress7({ onNext }: Progress7Props) {
   return (
     <div>
       <p className="font-semibold text-xl m-1">Your Feedback</p>
-      <div className="my-2 mx-1">
+      <div className="flex flex-col gap-2 my-2 mx-1">
         <p>
           We&apos;d love to know what you thought about this tutorial. How
           helpful was the AI tutor in improving your critical thinking skills?
         </p>
 
         <Pagination total={5} />
-        <p className="my-3">Any additional comments or suggestions?</p>
+        <p className="my-2 mx-1">Any additional comments or suggestions?</p>
         <Textarea className="my-1" label="Type here..." />
       </div>
 

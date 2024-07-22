@@ -107,11 +107,11 @@ export default function Progress4({ onNext }: Progress4Props) {
   return (
     <div>
       <p className="font-semibold text-xl m-1">AI Tutor Conversation</p>
-      <div className="m-1 flex flex-row gap-1 bg-blue-100 rounded-md justify-between p-1">
+      <div className="m-1 flex flex-row gap-1 bg-blue-100 rounded-md justify-between p-2">
         <p>Topic: Identifying Underlying Assumptions</p>{" "}
         <Timer onNext={onNext} />
       </div>
-      <Card className="flex flex-col text-center my-2">
+      <Card className="flex flex-col text-center my-2 gap-2 p-1">
         <div className="flex flex-row items-center">
           {" "}
           <p className="font-bold m-2">Your Conversation...</p>
@@ -145,37 +145,32 @@ export default function Progress4({ onNext }: Progress4Props) {
           />
           {loading && (
             <Button
-              className="bg-blue-400 text-white font-medium gap-x-px"
+              className="bg-blue-400 text-white font-medium gap-x-px min-w-[2rem] min-h-[2rem]"
               isDisabled
             >
-              Send
               <p className="material-symbols-outlined">send</p>
             </Button>
           )}
           {!loading && (
             <Button
-              className="bg-blue-400 text-white font-medium gap-x-px"
+              className="bg-blue-400 text-white font-medium min-w-[2rem] min-h-[2rem]"
               onClick={handleQuery}
               // onClick={fetchGPTResponse(userMsg)}
             >
-              Send
               <p className="material-symbols-outlined">send</p>
             </Button>
           )}
         </div>
       </Card>
 
-      <Button
-        className="bg-blue-400 text-white font-medium gap-x-px"
-        onClick={onNext}
-      >
+      <Button className="bg-blue-400 text-white font-medium" onClick={onNext}>
         End Conversation
         <p className="material-symbols-outlined">chevron_right</p>
       </Button>
-      <div className="flex flex-row my-2">
+      {/* <div className="flex flex-row my-2">
         <span className="material-symbols-outlined">info</span>
         <p>Progress: 4/7</p>
-      </div>
+      </div> */}
     </div>
   );
 }
