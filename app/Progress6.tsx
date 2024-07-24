@@ -2,9 +2,16 @@ import { Button, Radio, RadioGroup, Textarea } from "@nextui-org/react";
 import { useEffect, useState } from "react";
 interface Progress6Props {
   onNext: () => void;
+  openingLine: string;
+  prompts: string;
 }
 
-export default function Progress6({ onNext }: Progress6Props) {
+export default function Progress6({
+  onNext,
+
+  openingLine,
+  prompts,
+}: Progress6Props) {
   return (
     <div>
       <p className="font-semibold text-xl m-1">Your Progress</p>

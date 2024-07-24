@@ -1,9 +1,16 @@
 import { Button } from "@nextui-org/react";
 interface Progress1Props {
   onNext: () => void;
+
+  openingLine: string;
+  prompts: string;
 }
 
-export default function Progress1({ onNext }: Progress1Props) {
+export default function Progress1({
+  onNext,
+  openingLine,
+  prompts,
+}: Progress1Props) {
   return (
     <div className="flex flex-col gap-2 p-1 md:p-1 lg:p-1 w-full">
       <p className="font-semibold text-lg md:text-xl lg:text-2xl ">

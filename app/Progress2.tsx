@@ -1,22 +1,46 @@
 import { Button, Radio, RadioGroup, Textarea } from "@nextui-org/react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+
 interface Progress2Props {
-  onNext: () => void;
+  onNext: (data: any) => void;
+
+  openingLine: string;
+  prompts: string;
 }
 
-export default function Progress2({ onNext }: Progress2Props) {
+export default function Progress2({
+  onNext,
+  openingLine,
+  prompts,
+}: Progress2Props) {
   const [question1, setQuestion1] = useState("");
   const [question2, setQuestion2] = useState("");
+  const [shortAnswer, setShortAnswer] = useState("");
 
   const handleQuestion1Change = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
     setQuestion1(event.target.value);
   };
+
   const handleQuestion2Change = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
     setQuestion2(event.target.value);
+  };
+
+  const handleShortAnswerChange = (value: string) => {
+    setShortAnswer(value);
+  };
+
+  const handleSubmit = () => {
+    const data = {
+      question1,
+      question2,
+      shortAnswer,
+    };
+    console.log(data);
+    onNext(data);
   };
 
   return (
@@ -83,10 +107,15 @@ export default function Progress2({ onNext }: Progress2Props) {
           explain your reasoning.
         </p>
       </div>
-      <Textarea className="my-2 mr-2" label="Type here..." />
+      <Textarea
+        className="my-2 mr-2"
+        label="Type here..."
+        value={shortAnswer}
+        onValueChange={handleShortAnswerChange}
+      />
       <Button
         className="bg-blue-400 text-white font-medium gap-x-px mx-1"
-        onClick={onNext}
+        onClick={handleSubmit}
       >
         Submit Pre-Test
         <p className="material-symbols-outlined">chevron_right</p>

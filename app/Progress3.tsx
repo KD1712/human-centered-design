@@ -2,9 +2,17 @@ import { Button, Radio, RadioGroup, Textarea } from "@nextui-org/react";
 import { useEffect, useState } from "react";
 interface Progress3Props {
   onNext: () => void;
+
+  openingLine: string;
+  prompts: string;
 }
 
-export default function Progress3({ onNext }: Progress3Props) {
+export default function Progress3({
+  onNext,
+
+  openingLine,
+  prompts,
+}: Progress3Props) {
   return (
     <div>
       <p className="font-semibold text-xl m-1">Meet Your AI Tutor</p>

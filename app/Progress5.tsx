@@ -1,23 +1,49 @@
 import { Button, Radio, RadioGroup, Textarea } from "@nextui-org/react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+
 interface Progress5Props {
   onNext: () => void;
+  openingLine: string;
+  prompts: string;
 }
 
-export default function Progress5({ onNext }: Progress5Props) {
+export default function Progress5({
+  onNext,
+  openingLine,
+  prompts,
+}: Progress5Props) {
   const [question1, setQuestion1] = useState("");
   const [question2, setQuestion2] = useState("");
+  const [shortAnswer, setShortAnswer] = useState("");
 
   const handleQuestion1Change = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
     setQuestion1(event.target.value);
   };
+
   const handleQuestion2Change = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
     setQuestion2(event.target.value);
   };
+
+  const handleShortAnswerChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setShortAnswer(event.target.value);
+  };
+
+  const handleSubmit = () => {
+    const data = {
+      question1,
+      question2,
+      shortAnswer,
+    };
+    console.log(data);
+    onNext();
+  };
+
   return (
     <div className="flex flex-col gap-2 items-start">
       <p className="font-semibold text-xl m-1">
@@ -77,15 +103,19 @@ export default function Progress5({ onNext }: Progress5Props) {
           increases productivity.&quot;
         </p>
         <p>
-          {" "}
           Identify one underlying assumption in this statement and briefly
           explain your reasoning.
         </p>
       </div>
-      <Textarea className="my-2 mr-2" label="Type here..." />
+      <Textarea
+        className="my-2 mr-2"
+        label="Type here..."
+        value={shortAnswer}
+        onChange={handleShortAnswerChange}
+      />
       <Button
         className="bg-blue-400 text-white font-medium mx-1"
-        onClick={onNext}
+        onClick={handleSubmit}
       >
         Submit Post-Test
         <p className="material-symbols-outlined">chevron_right</p>
