@@ -322,12 +322,12 @@ export default function Progress4({
                 </div>
               ) : (
                 <div className="bg-gray-200 my-1 p-1 rounded">
+                  <div ref={messagesEndRef} />
                   <strong>AI:</strong> {message.text}
                 </div>
               )}
             </div>
           ))}
-          <div ref={messagesEndRef} />
         </CardBody>
 
         <div className="flex flex-row gap-1 items-center m-1">
