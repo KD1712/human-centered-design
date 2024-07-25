@@ -1,18 +1,21 @@
 import { Button, Radio, RadioGroup, Textarea } from "@nextui-org/react";
 import { useState } from "react";
+import { UserResponseProps } from "./App";
 
 interface Progress5Props {
   onNext: () => void;
   openingLine: string;
   prompts: string;
-  sessionid: string;
+  userResponse: UserResponseProps;
+  updateUserResponse: (updatedResponse: Partial<UserResponseProps>) => void;
 }
 
 export default function Progress5({
   onNext,
   openingLine,
   prompts,
-  sessionid,
+  userResponse,
+  updateUserResponse,
 }: Progress5Props) {
   const [question1, setQuestion1] = useState("");
   const [question2, setQuestion2] = useState("");
@@ -37,15 +40,15 @@ export default function Progress5({
   };
 
   const handleSubmit = () => {
-    const data = {
-      question1,
-      question2,
-      shortAnswer,
-      response_type: "post-test",
-      sessionid: sessionid,
+    const updatedResponse = {
+      ...userResponse,
+      post_question1: question1,
+      post_question2: question2,
+      post_shortAnswer: shortAnswer,
       step_no: 5,
     };
-    console.log(data);
+    updateUserResponse(updatedResponse);
+    console.log(updatedResponse);
     onNext();
   };
 

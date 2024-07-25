@@ -1,18 +1,21 @@
 import { Button, Pagination, Textarea } from "@nextui-org/react";
 import { useState } from "react";
+import { UserResponseProps } from "./App";
 
 interface Progress7Props {
   onNext: () => void;
   openingLine: string;
   prompts: string;
-  sessionid: string;
+  userResponse: UserResponseProps;
+  updateUserResponse: (updatedResponse: Partial<UserResponseProps>) => void;
 }
 
 export default function Progress7({
   onNext,
   openingLine,
   prompts,
-  sessionid,
+  userResponse,
+  updateUserResponse,
 }: Progress7Props) {
   const [rating, setRating] = useState<number>(1); // Default rating
   const [comments, setComments] = useState("");
@@ -26,15 +29,15 @@ export default function Progress7({
   };
 
   const handleFinish = () => {
-    const data = {
-      rating,
-      comments,
-      response_type: "feedback",
-      sessionid: sessionid,
+    const updatedResponse = {
+      ...userResponse,
       step_no: 7,
+      rating: rating,
+      comments: comments,
       app_end_timestamp: new Date().toISOString(),
     };
-    console.log(data);
+    updateUserResponse(updatedResponse);
+    console.log(updatedResponse);
     onNext();
   };
 
@@ -46,7 +49,7 @@ export default function Progress7({
           We&apos;d love to know what you thought about this tutorial. How
           helpful was the AI tutor in improving your critical thinking skills?
         </p>
-        <Pagination total={5} />
+        <Pagination total={5} onChange={handleRatingChange} />
 
         <p className="my-2 mx-1">Any additional comments or suggestions?</p>
         <Textarea

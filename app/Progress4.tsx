@@ -1,12 +1,14 @@
 "use-client";
 import { Button, Card, CardBody, Textarea } from "@nextui-org/react";
 import { useEffect, useState, useRef } from "react";
+import { UserResponseProps } from "./App";
 
 interface Progress4Props {
   onNext: () => void;
   openingLine: string;
   prompts: string;
-  sessionid: string;
+  userResponse: UserResponseProps;
+  updateUserResponse: (updatedResponse: Partial<UserResponseProps>) => void;
 }
 
 interface Message {
@@ -50,7 +52,8 @@ export default function Progress4({
   onNext,
   openingLine,
   prompts,
-  sessionid,
+  userResponse,
+  updateUserResponse,
 }: Progress4Props) {
   const [userMsg, setUserMsg] = useState("");
   const [loading, setLoading] = useState(false);
@@ -118,13 +121,13 @@ export default function Progress4({
   };
 
   const handleEndConversation = () => {
-    const data = {
-      messages,
-      response_type: "ai-conversation",
-      sessionid: sessionid,
+    const updatedResponse = {
+      ...userResponse,
+      messages: messages,
       step_no: 4,
     };
-    console.log("Messages at end of conversation:", data);
+    updateUserResponse(updatedResponse);
+    console.log(updatedResponse);
     onNext();
   };
 

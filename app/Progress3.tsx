@@ -1,25 +1,29 @@
 import { Button, Radio, RadioGroup, Textarea } from "@nextui-org/react";
 import { useEffect, useState } from "react";
+import { UserResponseProps } from "./App";
 interface Progress3Props {
   onNext: () => void;
 
   openingLine: string;
   prompts: string;
-  sessionid: string;
+  userResponse: UserResponseProps;
+  updateUserResponse: (updatedResponse: Partial<UserResponseProps>) => void;
 }
 
 export default function Progress3({
   onNext,
   openingLine,
   prompts,
-  sessionid,
+  userResponse,
+  updateUserResponse,
 }: Progress3Props) {
   const handleSubmit = () => {
-    const data = {
-      sessionid,
+    const updatedResponse = {
+      ...userResponse,
       step_no: 3,
     };
-    console.log(data);
+    updateUserResponse(updatedResponse);
+    console.log(updatedResponse);
     onNext();
   };
   return (
