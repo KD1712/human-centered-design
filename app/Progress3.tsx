@@ -5,14 +5,23 @@ interface Progress3Props {
 
   openingLine: string;
   prompts: string;
+  sessionid: string;
 }
 
 export default function Progress3({
   onNext,
-
   openingLine,
   prompts,
+  sessionid,
 }: Progress3Props) {
+  const handleSubmit = () => {
+    const data = {
+      sessionid,
+      step_no: 3,
+    };
+    console.log(data);
+    onNext();
+  };
   return (
     <div>
       <p className="font-semibold text-xl m-1">Meet Your AI Tutor</p>
@@ -38,7 +47,7 @@ export default function Progress3({
 
       <Button
         className="bg-blue-400 text-white font-medium m-1"
-        onClick={onNext}
+        onClick={handleSubmit}
       >
         Start Conversation
         <p className="material-symbols-outlined">chevron_right</p>

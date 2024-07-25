@@ -6,12 +6,14 @@ interface Progress2Props {
 
   openingLine: string;
   prompts: string;
+  sessionid: string;
 }
 
 export default function Progress2({
   onNext,
   openingLine,
   prompts,
+  sessionid,
 }: Progress2Props) {
   const [question1, setQuestion1] = useState("");
   const [question2, setQuestion2] = useState("");
@@ -38,6 +40,9 @@ export default function Progress2({
       question1,
       question2,
       shortAnswer,
+      response_type: "pre-test",
+      step_no: 2,
+      sessionid: sessionid,
     };
     console.log(data);
     onNext(data);

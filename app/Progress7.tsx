@@ -3,16 +3,16 @@ import { useState } from "react";
 
 interface Progress7Props {
   onNext: () => void;
-
   openingLine: string;
   prompts: string;
+  sessionid: string;
 }
 
 export default function Progress7({
   onNext,
-
   openingLine,
   prompts,
+  sessionid,
 }: Progress7Props) {
   const [rating, setRating] = useState<number>(1); // Default rating
   const [comments, setComments] = useState("");
@@ -29,6 +29,10 @@ export default function Progress7({
     const data = {
       rating,
       comments,
+      response_type: "feedback",
+      sessionid: sessionid,
+      step_no: 7,
+      app_end_timestamp: new Date().toISOString(),
     };
     console.log(data);
     onNext();

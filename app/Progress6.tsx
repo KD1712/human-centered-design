@@ -4,14 +4,23 @@ interface Progress6Props {
   onNext: () => void;
   openingLine: string;
   prompts: string;
+  sessionid: string;
 }
 
 export default function Progress6({
   onNext,
-
   openingLine,
   prompts,
+  sessionid,
 }: Progress6Props) {
+  const handleSubmit = () => {
+    const data = {
+      sessionid,
+      step_no: 6,
+    };
+    console.log(data);
+    onNext();
+  };
   return (
     <div>
       <p className="font-semibold text-xl m-1">Your Progress</p>
@@ -33,7 +42,7 @@ export default function Progress6({
 
       <Button
         className="bg-blue-400 text-white font-medium m-1"
-        onClick={onNext}
+        onClick={handleSubmit}
       >
         Finish
         <p className="material-symbols-outlined">chevron_right</p>

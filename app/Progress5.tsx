@@ -5,12 +5,14 @@ interface Progress5Props {
   onNext: () => void;
   openingLine: string;
   prompts: string;
+  sessionid: string;
 }
 
 export default function Progress5({
   onNext,
   openingLine,
   prompts,
+  sessionid,
 }: Progress5Props) {
   const [question1, setQuestion1] = useState("");
   const [question2, setQuestion2] = useState("");
@@ -39,6 +41,9 @@ export default function Progress5({
       question1,
       question2,
       shortAnswer,
+      response_type: "post-test",
+      sessionid: sessionid,
+      step_no: 5,
     };
     console.log(data);
     onNext();

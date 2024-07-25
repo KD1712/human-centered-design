@@ -1,16 +1,31 @@
 import { Button } from "@nextui-org/react";
+import { useEffect } from "react";
 interface Progress1Props {
   onNext: () => void;
-
   openingLine: string;
   prompts: string;
+  sessionid: string;
 }
 
 export default function Progress1({
   onNext,
   openingLine,
   prompts,
+  sessionid,
 }: Progress1Props) {
+  useEffect(() => {
+    // console.log(sessionid);
+    // console.log(openingLine);
+  }, [sessionid]);
+  const handleSubmit = () => {
+    const data = {
+      step_no: 1,
+      sessionid: sessionid,
+      app_start_timestamp: new Date().toISOString(),
+    };
+    console.log(data);
+    onNext();
+  };
   return (
     <div className="flex flex-col gap-2 p-1 md:p-1 lg:p-1 w-full">
       <p className="font-semibold text-lg md:text-xl lg:text-2xl ">
@@ -32,7 +47,7 @@ export default function Progress1({
       <div className="flex">
         <Button
           className="bg-blue-400 text-white font-medium gap-x-px md:mt-4 lg:mt-3"
-          onClick={onNext}
+          onClick={handleSubmit}
         >
           Start
           <p className="material-symbols-outlined">chevron_right</p>
