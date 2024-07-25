@@ -1,6 +1,7 @@
 import { Button, Pagination, Textarea } from "@nextui-org/react";
 import { useState } from "react";
 import { UserResponseProps } from "./App";
+import { submitResponse } from "./api";
 
 interface Progress7Props {
   onNext: () => void;
@@ -19,6 +20,7 @@ export default function Progress7({
 }: Progress7Props) {
   const [rating, setRating] = useState<number>(1); // Default rating
   const [comments, setComments] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleRatingChange = (value: number) => {
     setRating(value);
@@ -28,7 +30,7 @@ export default function Progress7({
     setComments(value);
   };
 
-  const handleFinish = () => {
+  const handleFinish = async () => {
     const updatedResponse = {
       ...userResponse,
       step_no: 7,
@@ -38,6 +40,10 @@ export default function Progress7({
     };
     updateUserResponse(updatedResponse);
     console.log(updatedResponse);
+    setLoading(true);
+    await submitResponse(updatedResponse);
+    setLoading(false);
+
     onNext();
   };
 
@@ -60,13 +66,20 @@ export default function Progress7({
         />
       </div>
 
-      <Button
-        className="bg-blue-400 text-white font-medium mx-1"
-        onClick={handleFinish}
-      >
-        Finish
-        <p className="material-symbols-outlined">chevron_right</p>
-      </Button>
+      {loading ? (
+        <Button className="bg-blue-400 text-white font-medium mx-1" isDisabled>
+          Finish
+          <p className="material-symbols-outlined">chevron_right</p>
+        </Button>
+      ) : (
+        <Button
+          className="bg-blue-400 text-white font-medium mx-1"
+          onClick={handleFinish}
+        >
+          Finish
+          <p className="material-symbols-outlined">chevron_right</p>
+        </Button>
+      )}
     </div>
   );
 }

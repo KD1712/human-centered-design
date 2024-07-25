@@ -1,6 +1,7 @@
 import { Button, Radio, RadioGroup, Textarea } from "@nextui-org/react";
 import { useState } from "react";
 import { UserResponseProps } from "./App";
+import { submitResponse } from "./api";
 
 interface Progress5Props {
   onNext: () => void;
@@ -20,6 +21,7 @@ export default function Progress5({
   const [question1, setQuestion1] = useState("");
   const [question2, setQuestion2] = useState("");
   const [shortAnswer, setShortAnswer] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleQuestion1Change = (
     event: React.ChangeEvent<HTMLInputElement>
@@ -39,7 +41,7 @@ export default function Progress5({
     setShortAnswer(event.target.value);
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     const updatedResponse = {
       ...userResponse,
       post_question1: question1,
@@ -48,7 +50,10 @@ export default function Progress5({
       step_no: 5,
     };
     updateUserResponse(updatedResponse);
-    console.log(updatedResponse);
+    setLoading(true);
+    await submitResponse(updatedResponse);
+    setLoading(false);
+
     onNext();
   };
 
@@ -121,13 +126,20 @@ export default function Progress5({
         value={shortAnswer}
         onChange={handleShortAnswerChange}
       />
-      <Button
-        className="bg-blue-400 text-white font-medium mx-1"
-        onClick={handleSubmit}
-      >
-        Submit Post-Test
-        <p className="material-symbols-outlined">chevron_right</p>
-      </Button>
+      {loading ? (
+        <Button className="bg-blue-400 text-white font-medium mx-1" isDisabled>
+          Submit Post-Test
+          <p className="material-symbols-outlined">chevron_right</p>
+        </Button>
+      ) : (
+        <Button
+          className="bg-blue-400 text-white font-medium mx-1"
+          onClick={handleSubmit}
+        >
+          Submit Post-Test
+          <p className="material-symbols-outlined">chevron_right</p>
+        </Button>
+      )}
       {/* <div className="flex flex-row my-2 mx-1">
         <span className="material-symbols-outlined">info</span>
         <p>Progress: 5/7</p>

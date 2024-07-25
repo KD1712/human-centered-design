@@ -139,6 +139,7 @@
 import { Button, Radio, RadioGroup, Textarea } from "@nextui-org/react";
 import { useState } from "react";
 import { UserResponseProps } from "./App";
+import { submitResponse } from "./api";
 
 interface Progress2Props {
   onNext: () => void;
@@ -158,6 +159,7 @@ export default function Progress2({
   const [question1, setQuestion1] = useState("");
   const [question2, setQuestion2] = useState("");
   const [shortAnswer, setShortAnswer] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleQuestion1Change = (
     event: React.ChangeEvent<HTMLInputElement>
@@ -175,7 +177,7 @@ export default function Progress2({
     setShortAnswer(value);
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     const updatedResponse = {
       ...userResponse,
       pre_question1: question1,
@@ -184,8 +186,9 @@ export default function Progress2({
       step_no: 2,
     };
     updateUserResponse(updatedResponse);
-    console.log(updatedResponse);
-
+    setLoading(true);
+    await submitResponse(updatedResponse);
+    setLoading(false);
     onNext();
   };
 
@@ -259,13 +262,23 @@ export default function Progress2({
         value={shortAnswer}
         onValueChange={handleShortAnswerChange}
       />
-      <Button
-        className="bg-blue-400 text-white font-medium gap-x-px mx-1"
-        onClick={handleSubmit}
-      >
-        Submit Pre-Test
-        <p className="material-symbols-outlined">chevron_right</p>
-      </Button>
+      {loading ? (
+        <Button
+          className="bg-blue-400 text-white font-medium gap-x-px mx-1"
+          isDisabled
+        >
+          Submit Pre-Test
+          <p className="material-symbols-outlined">chevron_right</p>
+        </Button>
+      ) : (
+        <Button
+          className="bg-blue-400 text-white font-medium gap-x-px mx-1"
+          onClick={handleSubmit}
+        >
+          Submit Pre-Test
+          <p className="material-symbols-outlined">chevron_right</p>
+        </Button>
+      )}
       {/* <div className="flex flex-row my-2 mx-1">
         <span className="material-symbols-outlined">info</span>
         <p>Progress: 2/7</p>

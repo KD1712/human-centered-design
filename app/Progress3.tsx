@@ -1,6 +1,7 @@
 import { Button, Radio, RadioGroup, Textarea } from "@nextui-org/react";
 import { useEffect, useState } from "react";
 import { UserResponseProps } from "./App";
+import { submitResponse } from "./api";
 interface Progress3Props {
   onNext: () => void;
 
@@ -17,13 +18,19 @@ export default function Progress3({
   userResponse,
   updateUserResponse,
 }: Progress3Props) {
-  const handleSubmit = () => {
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = async () => {
     const updatedResponse = {
       ...userResponse,
       step_no: 3,
     };
     updateUserResponse(updatedResponse);
-    console.log(updatedResponse);
+    // console.log(updatedResponse);
+    setLoading(true);
+    await submitResponse(updatedResponse);
+    setLoading(false);
+
     onNext();
   };
   return (
@@ -49,13 +56,20 @@ export default function Progress3({
         </p>
       </div>
 
-      <Button
-        className="bg-blue-400 text-white font-medium m-1"
-        onClick={handleSubmit}
-      >
-        Start Conversation
-        <p className="material-symbols-outlined">chevron_right</p>
-      </Button>
+      {loading ? (
+        <Button className="bg-blue-400 text-white font-medium m-1" isDisabled>
+          Start Conversation
+          <p className="material-symbols-outlined">chevron_right</p>
+        </Button>
+      ) : (
+        <Button
+          className="bg-blue-400 text-white font-medium m-1"
+          onClick={handleSubmit}
+        >
+          Start Conversation
+          <p className="material-symbols-outlined">chevron_right</p>
+        </Button>
+      )}
       {/* <div className="flex flex-row my-2 mx-1">
         <span className="material-symbols-outlined">info</span>
         <p>Progress: 3/7</p>

@@ -2,6 +2,7 @@
 import { Button, Card, CardBody, Textarea } from "@nextui-org/react";
 import { useEffect, useState, useRef } from "react";
 import { UserResponseProps } from "./App";
+import { submitResponse } from "./api";
 
 interface Progress4Props {
   onNext: () => void;
@@ -120,14 +121,17 @@ export default function Progress4({
     }
   };
 
-  const handleEndConversation = () => {
+  const handleEndConversation = async () => {
     const updatedResponse = {
       ...userResponse,
       messages: messages,
       step_no: 4,
     };
     updateUserResponse(updatedResponse);
-    console.log(updatedResponse);
+    setLoading(true);
+    await submitResponse(updatedResponse);
+    setLoading(false);
+
     onNext();
   };
 
@@ -195,13 +199,20 @@ export default function Progress4({
         </div>
       </Card>
 
-      <Button
-        className="bg-blue-400 text-white font-medium"
-        onClick={handleEndConversation}
-      >
-        End Conversation
-        <p className="material-symbols-outlined">chevron_right</p>
-      </Button>
+      {loading ? (
+        <Button className="bg-blue-400 text-white font-medium" isDisabled>
+          End Conversation
+          <p className="material-symbols-outlined">chevron_right</p>
+        </Button>
+      ) : (
+        <Button
+          className="bg-blue-400 text-white font-medium"
+          onClick={handleEndConversation}
+        >
+          End Conversation
+          <p className="material-symbols-outlined">chevron_right</p>
+        </Button>
+      )}
     </div>
   );
 }
