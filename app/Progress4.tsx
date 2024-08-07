@@ -3,51 +3,20 @@ import { Button, Card, CardBody, Textarea } from "@nextui-org/react";
 import { useEffect, useState, useRef } from "react";
 import { UserResponseProps } from "./App";
 import { submitResponse } from "./api";
+import { getFormattedTimestamp } from "./helper function/timestamp";
 
 interface Progress4Props {
   onNext: () => void;
   openingLine: string;
   prompts: string;
-  userResponse: UserResponseProps;
-  updateUserResponse: (updatedResponse: Partial<UserResponseProps>) => void;
+  userResponse: any;
+  updateUserResponse: (updatedResponse: any) => void;
 }
 
 interface Message {
   type: "question" | "response";
   text: string;
 }
-
-const Timer: React.FC<{ onNext: () => void }> = ({ onNext }) => {
-  const [seconds, setSeconds] = useState(540); // 9 minutes in seconds
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setSeconds((prevSeconds) => {
-        if (prevSeconds > 0) {
-          return prevSeconds - 1;
-        } else {
-          clearInterval(timer);
-          onNext(); // Call the callback function when timer expires
-          return 0;
-        }
-      });
-    }, 1000);
-
-    return () => clearInterval(timer);
-  }, [onNext]);
-
-  const formatTime = (timeInSeconds: number): string => {
-    const minutes = Math.floor(timeInSeconds / 60);
-    const seconds = timeInSeconds % 60;
-    return `${minutes}:${seconds < 10 ? "0" + seconds : seconds}`;
-  };
-
-  return (
-    <p className="flex align-middle justify-center font-semibold">
-      {formatTime(seconds)}
-    </p>
-  );
-};
 
 export default function Progress4({
   onNext,
@@ -61,12 +30,76 @@ export default function Progress4({
   const [messages, setMessages] = useState<Message[]>([
     { type: "response", text: openingLine },
   ]);
-  // console.log(messages);
+  const [timerSeconds, setTimerSeconds] = useState(5); // Initialize with 9 minutes in seconds
+
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
+  // const timerRef = useRef<NodeJS.Timeout | null>(null); // Ref to store the timer
+
+  const Timer: React.FC<{ onNext: () => void }> = ({ onNext }) => {
+    // useEffect(() => {
+    //   timerRef.current = setInterval(() => {
+    //     setTimerSeconds((prevSeconds) => {
+    //       if (prevSeconds > 0) {
+    //         return prevSeconds - 1;
+    //       } else {
+    //         clearInterval(timerRef.current as NodeJS.Timeout);
+    //         // setFinishType("timer");
+    //         // let type = "timer"
+    //         // Use a callback to ensure that state is updated before handling end conversation
+    //         handleEndConversation("timer");
+    //         return 0;
+    //       }
+    //     });
+    //   }, 1000);
+
+    //   return () => clearInterval(timerRef.current as NodeJS.Timeout);
+    // }, [onNext]);
+    const [timerSeconds, setTimerSeconds] = useState(540); // Example starting value
+    const [timerFinished, setTimerFinished] = useState(false);
+    const timerRef = useRef<NodeJS.Timeout | null>(null);
+    useEffect(() => {
+      // Set up the timer
+      timerRef.current = setInterval(() => {
+        setTimerSeconds((prevSeconds) => {
+          if (prevSeconds > 0) {
+            return prevSeconds - 1;
+          } else {
+            clearInterval(timerRef.current as NodeJS.Timeout);
+            setTimerFinished(true); // Signal that the timer has finished
+            return 0;
+          }
+        });
+      }, 1000);
+
+      return () => {
+        if (timerRef.current) {
+          clearInterval(timerRef.current);
+        }
+      };
+    }, [onNext]);
+    useEffect(() => {
+      if (timerFinished) {
+        handleEndConversation("timer");
+      }
+    }, [timerFinished]);
+
+    const formatTime = (timeInSeconds: number): string => {
+      const minutes = Math.floor(timeInSeconds / 60);
+      const seconds = timeInSeconds % 60;
+      return `${minutes}:${seconds < 10 ? "0" + seconds : seconds}`;
+    };
+
+    return (
+      <p className="flex align-middle justify-center font-semibold">
+        {formatTime(timerSeconds)}
+      </p>
+    );
+  };
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };
+
   useEffect(() => {
     scrollToBottom();
   }, [messages]);
@@ -121,16 +154,21 @@ export default function Progress4({
     }
   };
 
-  const handleEndConversation = async () => {
+  const handleEndConversation = async (finishtype: any) => {
+    // Make sure the state is updated before using it
     const updatedResponse = {
       ...userResponse,
       messages: messages,
-      step_no: 4,
+      eventtype: "Step4AIConvFinish",
+      eventtime: getFormattedTimestamp(),
+      stepFinishType: finishtype,
+      timerRemainingSeconds: timerSeconds,
     };
-    updateUserResponse(updatedResponse);
+    // updateUserResponse(updatedResponse);
     setLoading(true);
-    await submitResponse(updatedResponse);
+    // await submitResponse(updatedResponse);
     setLoading(false);
+    console.log(updatedResponse);
 
     onNext();
   };
@@ -152,16 +190,6 @@ export default function Progress4({
         <CardBody className="h-[300px] overflow-y-auto">
           {messages.map((message, index) => (
             <div key={index}>
-              {/* {message.type === "question" ? (
-                <div className="bg-gray-200 my-1 p-1 rounded">
-                  <strong>User:</strong> {message.text}
-                </div>
-              ) : (
-                <div className="bg-gray-200 my-1 p-1 rounded">
-                  <div ref={messagesEndRef} />
-                  <strong>AI:</strong> {message.text}
-                </div>
-              )} */}
               {message.type === "question" ? (
                 <div className="bg-gray-200 my-1 p-1 rounded">
                   <strong>User:</strong>{" "}
@@ -207,7 +235,7 @@ export default function Progress4({
       ) : (
         <Button
           className="bg-blue-400 text-white font-medium"
-          onClick={handleEndConversation}
+          onClick={(e) => handleEndConversation("user")}
         >
           End Conversation
           <p className="material-symbols-outlined">chevron_right</p>

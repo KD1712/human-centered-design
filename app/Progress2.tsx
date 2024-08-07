@@ -140,13 +140,15 @@ import { Button, Radio, RadioGroup, Textarea } from "@nextui-org/react";
 import { useState } from "react";
 import { UserResponseProps } from "./App";
 import { submitResponse } from "./api";
+import { getFormattedTimestamp } from "./helper function/timestamp";
 
 interface Progress2Props {
   onNext: () => void;
   openingLine: string;
   prompts: string;
-  userResponse: UserResponseProps;
-  updateUserResponse: (updatedResponse: Partial<UserResponseProps>) => void;
+  // userResponse: UserResponseProps;
+  userResponse: any;
+  updateUserResponse: (updatedResponse: any) => void;
 }
 
 export default function Progress2({
@@ -178,16 +180,54 @@ export default function Progress2({
   };
 
   const handleSubmit = async () => {
-    const updatedResponse = {
+    const updatedResponse1 = {
       ...userResponse,
-      pre_question1: question1,
-      pre_question2: question2,
-      pre_shortAnswer: shortAnswer,
-      step_no: 2,
+      // pre_question1: question1,
+      // pre_question2: question2,
+      // pre_shortAnswer: shortAnswer,
+      // step_no: 2,
+      eventtype: "Step2PreTestFinish",
+      eventtime: getFormattedTimestamp(),
+      questionNum: 1,
+      question: `"We should invest more in renewable energy because it will create jobs." Which assumption underlies this argument?`,
+      answer: question1,
     };
-    updateUserResponse(updatedResponse);
+    const updatedResponse2 = {
+      ...userResponse,
+      // pre_question1: question1,
+      // pre_question2: question2,
+      // pre_shortAnswer: shortAnswer,
+      // step_no: 2,
+      eventtype: "Step2PreTestFinish",
+      eventtime: getFormattedTimestamp(),
+      questionNum: 2,
+      question: `Students who eat breakfast perform better in school, so all schools should provide free breakfast." Which assumption is being made?`,
+      answer: question2,
+    };
+    const updatedResponse3 = {
+      ...userResponse,
+      // pre_question1: question1,
+      // pre_question2: question2,
+      // pre_shortAnswer: shortAnswer,
+      // step_no: 2,
+      eventtype: "Step2PreTestFinish",
+      eventtime: getFormattedTimestamp(),
+      questionNum: 3,
+      question: `The government should lower the voting age to 16 because young people are affected by political decisions.`,
+      answer: shortAnswer,
+    };
+
+    // updateUserResponse(updatedResponse1);
     setLoading(true);
-    await submitResponse(updatedResponse);
+    // await submitResponse(updatedResponse);
+    // setLoading(false);
+    console.log(updatedResponse1);
+    // updateUserResponse(updatedResponse2);
+    // await submitResponse(updatedResponse);
+    console.log(updatedResponse2);
+    // updateUserResponse(updatedResponse3);
+    console.log(updatedResponse3);
+
     setLoading(false);
     onNext();
   };

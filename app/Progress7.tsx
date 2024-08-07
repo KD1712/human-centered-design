@@ -2,13 +2,15 @@ import { Button, Pagination, Textarea } from "@nextui-org/react";
 import { useState } from "react";
 import { UserResponseProps } from "./App";
 import { submitResponse } from "./api";
+import { getFormattedTimestamp } from "./helper function/timestamp";
 
 interface Progress7Props {
   onNext: () => void;
   openingLine: string;
   prompts: string;
-  userResponse: UserResponseProps;
-  updateUserResponse: (updatedResponse: Partial<UserResponseProps>) => void;
+  userResponse: any;
+  // updateUserResponse: (updatedResponse: Partial<UserResponseProps>) => void;
+  updateUserResponse: (updatedResponse: any) => void;
 }
 
 export default function Progress7({
@@ -33,10 +35,12 @@ export default function Progress7({
   const handleFinish = async () => {
     const updatedResponse = {
       ...userResponse,
-      step_no: 7,
+      // step_no: 7,
+      // app_end_timestamp: new Date().toISOString(),
       rating: rating,
-      comments: comments,
-      app_end_timestamp: new Date().toISOString(),
+      feedback: comments,
+      eventtype: "Step7FeedbackFinish",
+      eventtime: getFormattedTimestamp(),
     };
     updateUserResponse(updatedResponse);
     console.log(updatedResponse);

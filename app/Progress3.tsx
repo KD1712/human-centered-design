@@ -2,13 +2,15 @@ import { Button, Radio, RadioGroup, Textarea } from "@nextui-org/react";
 import { useEffect, useState } from "react";
 import { UserResponseProps } from "./App";
 import { submitResponse } from "./api";
+import { getFormattedTimestamp } from "./helper function/timestamp";
 interface Progress3Props {
   onNext: () => void;
 
   openingLine: string;
   prompts: string;
-  userResponse: UserResponseProps;
-  updateUserResponse: (updatedResponse: Partial<UserResponseProps>) => void;
+  // userResponse: UserResponseProps;
+  userResponse: any;
+  updateUserResponse: (updatedResponse: any) => void;
 }
 
 export default function Progress3({
@@ -23,12 +25,14 @@ export default function Progress3({
   const handleSubmit = async () => {
     const updatedResponse = {
       ...userResponse,
-      step_no: 3,
+      // step_no: 3,
+      eventtype: "Step3ConvInstructionsFinish",
+      eventtime: getFormattedTimestamp(),
     };
-    updateUserResponse(updatedResponse);
-    // console.log(updatedResponse);
+    // updateUserResponse(updatedResponse);
+    console.log(updatedResponse);
     setLoading(true);
-    await submitResponse(updatedResponse);
+    // await submitResponse(updatedResponse);
     setLoading(false);
 
     onNext();

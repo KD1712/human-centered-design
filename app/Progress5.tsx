@@ -2,13 +2,14 @@ import { Button, Radio, RadioGroup, Textarea } from "@nextui-org/react";
 import { useState } from "react";
 import { UserResponseProps } from "./App";
 import { submitResponse } from "./api";
+import { getFormattedTimestamp } from "./helper function/timestamp";
 
 interface Progress5Props {
   onNext: () => void;
   openingLine: string;
   prompts: string;
-  userResponse: UserResponseProps;
-  updateUserResponse: (updatedResponse: Partial<UserResponseProps>) => void;
+  userResponse: any;
+  updateUserResponse: (updatedResponse: any) => void;
 }
 
 export default function Progress5({
@@ -42,18 +43,54 @@ export default function Progress5({
   };
 
   const handleSubmit = async () => {
-    const updatedResponse = {
+    const updatedResponse1 = {
       ...userResponse,
-      post_question1: question1,
-      post_question2: question2,
-      post_shortAnswer: shortAnswer,
-      step_no: 5,
+      // post_question1: question1,
+      // post_question2: question2,
+      // post_shortAnswer: shortAnswer,
+      // step_no: 5,
+      eventtype: "Step5PostTestFinish",
+      eventtime: getFormattedTimestamp(),
+      questionNum: 1,
+      question: `"We should make all public transportation free to reduce carbon emissions." Which assumption underlies this argument?`,
+      answer: question1,
     };
-    updateUserResponse(updatedResponse);
+    const updatedResponse2 = {
+      ...userResponse,
+      // pre_question1: question1,
+      // pre_question2: question2,
+      // pre_shortAnswer: shortAnswer,
+      // step_no: 2,
+      eventtype: "Step5PostTestFinish",
+      eventtime: getFormattedTimestamp(),
+      questionNum: 2,
+      question: `"Violent video games should be banned because they lead to aggressive behavior." Which assumption is being made?`,
+      answer: question2,
+    };
+    const updatedResponse3 = {
+      ...userResponse,
+      // pre_question1: question1,
+      // pre_question2: question2,
+      // pre_shortAnswer: shortAnswer,
+      // step_no: 2,
+      eventtype: "Step5PostTestFinish",
+      eventtime: getFormattedTimestamp(),
+      questionNum: 3,
+      question: `Companies should allow employees to work from home because it increases productivity.`,
+      answer: shortAnswer,
+    };
+    // updateUserResponse(updatedResponse1);
     setLoading(true);
-    await submitResponse(updatedResponse);
-    setLoading(false);
+    // await submitResponse(updatedResponse);
+    // setLoading(false);
+    console.log(updatedResponse1);
+    // updateUserResponse(updatedResponse2);
+    // await submitResponse(updatedResponse);
+    console.log(updatedResponse2);
+    // updateUserResponse(updatedResponse3);
+    console.log(updatedResponse3);
 
+    setLoading(false);
     onNext();
   };
 
