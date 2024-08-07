@@ -140,10 +140,6 @@ export default function Progress4({
     }
   }, [timerFinished]);
 
-  useEffect(() => {
-    console.log(timerSeconds);
-  }, [timerSeconds]);
-
   const formatTime = (timeInSeconds: number): string => {
     const minutes = Math.floor(timeInSeconds / 60);
     const seconds = timeInSeconds % 60;
