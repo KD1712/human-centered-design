@@ -30,71 +30,11 @@ export default function Progress4({
   const [messages, setMessages] = useState<Message[]>([
     { type: "response", text: openingLine },
   ]);
-  const [timerSeconds, setTimerSeconds] = useState(5); // Initialize with 9 minutes in seconds
+
+  const [timerSeconds, setTimerSeconds] = useState(5); // Example starting value
+  const [timerFinished, setTimerFinished] = useState(false);
 
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
-  // const timerRef = useRef<NodeJS.Timeout | null>(null); // Ref to store the timer
-
-  const Timer: React.FC<{ onNext: () => void }> = ({ onNext }) => {
-    // useEffect(() => {
-    //   timerRef.current = setInterval(() => {
-    //     setTimerSeconds((prevSeconds) => {
-    //       if (prevSeconds > 0) {
-    //         return prevSeconds - 1;
-    //       } else {
-    //         clearInterval(timerRef.current as NodeJS.Timeout);
-    //         // setFinishType("timer");
-    //         // let type = "timer"
-    //         // Use a callback to ensure that state is updated before handling end conversation
-    //         handleEndConversation("timer");
-    //         return 0;
-    //       }
-    //     });
-    //   }, 1000);
-
-    //   return () => clearInterval(timerRef.current as NodeJS.Timeout);
-    // }, [onNext]);
-    const [timerSeconds, setTimerSeconds] = useState(540); // Example starting value
-    const [timerFinished, setTimerFinished] = useState(false);
-    const timerRef = useRef<NodeJS.Timeout | null>(null);
-    useEffect(() => {
-      // Set up the timer
-      timerRef.current = setInterval(() => {
-        setTimerSeconds((prevSeconds) => {
-          if (prevSeconds > 0) {
-            return prevSeconds - 1;
-          } else {
-            clearInterval(timerRef.current as NodeJS.Timeout);
-            setTimerFinished(true); // Signal that the timer has finished
-            return 0;
-          }
-        });
-      }, 1000);
-
-      return () => {
-        if (timerRef.current) {
-          clearInterval(timerRef.current);
-        }
-      };
-    }, [onNext]);
-    useEffect(() => {
-      if (timerFinished) {
-        handleEndConversation("timer");
-      }
-    }, [timerFinished]);
-
-    const formatTime = (timeInSeconds: number): string => {
-      const minutes = Math.floor(timeInSeconds / 60);
-      const seconds = timeInSeconds % 60;
-      return `${minutes}:${seconds < 10 ? "0" + seconds : seconds}`;
-    };
-
-    return (
-      <p className="flex align-middle justify-center font-semibold">
-        {formatTime(timerSeconds)}
-      </p>
-    );
-  };
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -173,12 +113,53 @@ export default function Progress4({
     onNext();
   };
 
+  useEffect(() => {
+    // Set up the timer
+    const timer = setInterval(() => {
+      setTimerSeconds((prevSeconds) => {
+        if (prevSeconds > 0) {
+          return prevSeconds - 1;
+        } else {
+          clearInterval(timer);
+          setTimerFinished(true); // Signal that the timer has finished
+          return 0;
+        }
+      });
+    }, 1000);
+
+    return () => {
+      if (timer) {
+        clearInterval(timer);
+      }
+    };
+  }, [onNext]);
+
+  useEffect(() => {
+    if (timerFinished) {
+      handleEndConversation("timer");
+    }
+  }, [timerFinished]);
+
+  useEffect(() => {
+    console.log(timerSeconds);
+  }, [timerSeconds]);
+
+  const formatTime = (timeInSeconds: number): string => {
+    const minutes = Math.floor(timeInSeconds / 60);
+    const seconds = timeInSeconds % 60;
+    return `${minutes}:${seconds < 10 ? "0" + seconds : seconds}`;
+  };
+
   return (
     <div>
       <p className="font-semibold text-xl m-1">AI Tutor Conversation</p>
       <div className="m-1 flex flex-row gap-1 bg-blue-100 align-middle items-center rounded-md justify-between p-2">
         <p>Topic: Identifying Underlying Assumptions</p>
-        <Timer onNext={onNext} />
+        {/* <Timer onNext={onNext} handleEndConversation={handleEndConversation} /> */}
+
+        <p className="flex align-middle justify-center font-semibold">
+          {formatTime(timerSeconds)}
+        </p>
       </div>
       <Card className="flex flex-col text-center my-2 gap-2 p-1">
         <div className="flex flex-row items-center">

@@ -43,7 +43,7 @@ export default function App() {
   // const [userResponse, setUserresponse] = useState<UserResponseProps>({
   const [userResponse, setUserresponse] = useState({
     // step_no: 1,
-    // sessionid: "",
+    sessionid: "",
     // app_start_timestamp: "",
     // pre_question1: "",
     // pre_question2: "",

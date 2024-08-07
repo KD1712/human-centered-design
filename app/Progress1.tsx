@@ -21,10 +21,6 @@ export default function Progress1({
 }: Progress1Props) {
   const [loading, setLoading] = useState(false);
 
-  // useEffect(() => {
-  //   console.log(userResponse);
-  // }, [userResponse]);
-
   const handleSubmit = async () => {
     const updatedResponse = {
       ...userResponse,
