@@ -31,7 +31,7 @@ export default function Progress4({
     { type: "response", text: openingLine },
   ]);
 
-  const [timerSeconds, setTimerSeconds] = useState(5); // Example starting value
+  const [timerSeconds, setTimerSeconds] = useState(540); // Example starting value
   const [timerFinished, setTimerFinished] = useState(false);
 
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
