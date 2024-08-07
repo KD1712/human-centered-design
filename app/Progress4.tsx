@@ -106,9 +106,9 @@ export default function Progress4({
     };
     // updateUserResponse(updatedResponse);
     setLoading(true);
-    // await submitResponse(updatedResponse);
+    await submitResponse(updatedResponse);
     setLoading(false);
-    console.log(updatedResponse);
+    // console.log(updatedResponse);
 
     onNext();
   };

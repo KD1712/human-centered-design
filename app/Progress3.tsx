@@ -30,9 +30,9 @@ export default function Progress3({
       eventtime: getFormattedTimestamp(),
     };
     // updateUserResponse(updatedResponse);
-    console.log(updatedResponse);
+    // console.log(updatedResponse);
     setLoading(true);
-    // await submitResponse(updatedResponse);
+    await submitResponse(updatedResponse);
     setLoading(false);
 
     onNext();

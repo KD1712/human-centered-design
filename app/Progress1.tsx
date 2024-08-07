@@ -20,6 +20,13 @@ export default function Progress1({
   updateUserResponse,
 }: Progress1Props) {
   const [loading, setLoading] = useState(false);
+  useEffect(() => {
+    console.log(userResponse);
+    const logInitialData = async () => {
+      await submitResponse(userResponse);
+    };
+    logInitialData();
+  }, []);
 
   const handleSubmit = async () => {
     const updatedResponse = {
@@ -30,9 +37,9 @@ export default function Progress1({
       eventtime: getFormattedTimestamp(),
     };
     updateUserResponse(updatedResponse);
-    console.log(updatedResponse);
+    // console.log(updatedResponse);
     setLoading(true);
-    // await submitResponse(updatedResponse);
+    await submitResponse(updatedResponse);
     setLoading(false);
 
     onNext();
@@ -40,8 +47,7 @@ export default function Progress1({
 
   return (
     <div className="flex flex-col gap-2 p-1 md:p-1 lg:p-1 w-full">
-      {loading ? <p>LOADING</p> : ""}
-
+      {/* {loading ? <p>LOADING</p> : ""} */}
       <p className="font-semibold text-lg md:text-xl lg:text-2xl ">
         Welcome to the Critical Thinking Tutor
       </p>

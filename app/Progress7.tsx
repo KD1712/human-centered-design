@@ -43,11 +43,10 @@ export default function Progress7({
       eventtime: getFormattedTimestamp(),
     };
     updateUserResponse(updatedResponse);
-    console.log(updatedResponse);
+    // console.log(updatedResponse);
     setLoading(true);
     await submitResponse(updatedResponse);
     setLoading(false);
-
     onNext();
   };
 

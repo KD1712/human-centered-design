@@ -11,6 +11,7 @@ import Progress7 from "./Progress7";
 import { v4 as uuidv4 } from "uuid";
 import { getFormattedTimestamp } from "./helper function/timestamp";
 import Progress8 from "./Progress8";
+import { submitResponse } from "./api";
 
 export interface Message {
   type: string;
@@ -43,7 +44,7 @@ export default function App() {
   // const [userResponse, setUserresponse] = useState<UserResponseProps>({
   const [userResponse, setUserresponse] = useState({
     // step_no: 1,
-    sessionid: "",
+    // sessionid: "",
     // app_start_timestamp: "",
     // pre_question1: "",
     // pre_question2: "",
@@ -79,7 +80,8 @@ export default function App() {
 
   useEffect(() => {
     if (currentProgress === 1) {
-      console.log(userResponse);
+      // console.log(userResponse);
+      // await submitResponse(userResponse);
     }
   }, [currentProgress]);
 

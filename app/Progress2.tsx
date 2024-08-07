@@ -219,14 +219,16 @@ export default function Progress2({
 
     // updateUserResponse(updatedResponse1);
     setLoading(true);
-    // await submitResponse(updatedResponse);
+    await submitResponse(updatedResponse1);
     // setLoading(false);
-    console.log(updatedResponse1);
+    // console.log(updatedResponse1);
     // updateUserResponse(updatedResponse2);
-    // await submitResponse(updatedResponse);
-    console.log(updatedResponse2);
+    await submitResponse(updatedResponse2);
+    // console.log(updatedResponse2);
     // updateUserResponse(updatedResponse3);
-    console.log(updatedResponse3);
+    await submitResponse(updatedResponse3);
+
+    // console.log(updatedResponse3);
 
     setLoading(false);
     onNext();
