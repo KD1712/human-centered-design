@@ -47,7 +47,7 @@ export default function Progress1({
 
   return (
     <div className="flex flex-col gap-2 p-1 md:p-1 lg:p-1 w-full">
-      {loading ? <p>LOADING</p> : ""}
+      {/* {loading ? <p>LOADING</p> : ""} */}
       <p className="font-semibold text-lg md:text-xl lg:text-2xl ">
         Welcome to the Critical Thinking Tutor
       </p>
