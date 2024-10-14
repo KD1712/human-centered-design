@@ -14,7 +14,7 @@ interface Progress4Props {
 }
 
 interface Message {
-  type: "question" | "response";
+  role: "prompt" | "user" | "assistant";
   text: string;
 }
 
@@ -28,7 +28,8 @@ export default function Progress4({
   const [userMsg, setUserMsg] = useState("");
   const [loading, setLoading] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
-    { type: "response", text: openingLine },
+    { role: "prompt", text: prompts },
+    { role: "assistant", text: openingLine },
   ]);
 
   const [timerSeconds, setTimerSeconds] = useState(540); // Example starting value
@@ -74,7 +75,7 @@ export default function Progress4({
       const conversationHistory = [
         { role: "system", content: contextPrompt },
         ...messages.map((message) => ({
-          role: message.type === "question" ? "user" : "assistant",
+          role: message.role === "user" ? "user" : "assistant",
           content: message.text,
         })),
         { role: "user", content: userMsg },
@@ -83,8 +84,8 @@ export default function Progress4({
       const responseText = await fetchGPTResponse(conversationHistory);
       setMessages((prevMessages) => [
         ...prevMessages,
-        { type: "question", text: userMsg },
-        { type: "response", text: responseText },
+        { role: "user", text: userMsg },
+        { role: "assistant", text: responseText },
       ]);
       setUserMsg("");
     } catch (error) {
@@ -106,9 +107,9 @@ export default function Progress4({
     };
     // updateUserResponse(updatedResponse);
     setLoading(true);
+    console.log(updatedResponse);
     await submitResponse(updatedResponse);
     setLoading(false);
-    // console.log(updatedResponse);
 
     onNext();
   };
@@ -148,38 +149,42 @@ export default function Progress4({
 
   return (
     <div>
-      <p className="font-semibold text-xl m-1">AI Tutor Conversation</p>
-      <div className="m-1 flex flex-row gap-1 bg-blue-100 align-middle items-center rounded-md justify-between p-2">
+      <div className="flex flex-row justify-between gap-1">
+        <p className="font-semibold text-xl m-1">AI Tutor Conversation</p>{" "}
+        <p className="font-semibold m-1 flex flex-row gap-1 bg-blue-100 align-middle items-center rounded-md justify-between p-2">
+          {formatTime(timerSeconds)}
+        </p>
+      </div>
+      {/* <div className="m-1 flex flex-row gap-1 bg-blue-100 align-middle items-center rounded-md justify-between p-2">
         <p>Topic: Identifying Underlying Assumptions</p>
-        {/* <Timer onNext={onNext} handleEndConversation={handleEndConversation} /> */}
 
         <p className="flex align-middle justify-center font-semibold">
           {formatTime(timerSeconds)}
         </p>
-      </div>
+      </div> */}
       <Card className="flex flex-col text-center my-2 gap-2 p-1">
         <div className="flex flex-row items-center">
           <p className="font-bold m-2">Your Conversation...</p>
-          {loading && (
+          {/* {loading && (
             <div className="w-4 h-4 border-2 border-t-2 border-t-transparent border-blue-500 rounded-full animate-spin"></div>
-          )}
+          )} */}
         </div>
         <CardBody className="h-[300px] overflow-y-auto">
-          {messages.map((message, index) => (
-            <div key={index}>
-              {message.type === "question" ? (
+          {messages.slice(1).map((message, index) => (
+            <div key={index + 1}>
+              {message.role === "user" ? (
                 <div className="bg-gray-200 my-1 p-1 rounded">
                   <strong>User:</strong>{" "}
-                  {message.text.split("\n").map((line, index) => (
-                    <div key={index}>{line}</div>
+                  {message.text.split("\n").map((line, lineIndex) => (
+                    <div key={lineIndex}>{line}</div>
                   ))}
                 </div>
               ) : (
                 <div className="bg-gray-200 my-1 p-1 rounded">
                   <div ref={messagesEndRef} />
                   <strong>AI:</strong>{" "}
-                  {message.text.split("\n").map((line, index) => (
-                    <div key={index}>{line}</div>
+                  {message.text.split("\n").map((line, lineIndex) => (
+                    <div key={lineIndex}>{line}</div>
                   ))}
                 </div>
               )}
@@ -194,13 +199,18 @@ export default function Progress4({
             value={userMsg}
             onValueChange={setUserMsg}
           />
-          <Button
-            className="bg-blue-400 text-white font-medium min-w-[2rem] min-h-[2rem]"
-            onClick={handleQuery}
-            isDisabled={loading}
-          >
-            <p className="material-symbols-outlined">send</p>
-          </Button>
+          <div className="flex flex-col gap-1 items-center">
+            {loading && (
+              <div className="w-5 h-5 border-3 border-t-3 border-t-transparent border-blue-500 rounded-full animate-spin"></div>
+            )}
+            <Button
+              className="bg-blue-400 text-white font-medium min-w-[2rem] min-h-[2rem]"
+              onClick={handleQuery}
+              isDisabled={loading}
+            >
+              <p className="material-symbols-outlined">send</p>
+            </Button>
+          </div>
         </div>
       </Card>
 
