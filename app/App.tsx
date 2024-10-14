@@ -96,12 +96,12 @@ export default function App() {
   const generateUniqueRandomIndex = (): number => {
     let newIndex: number;
     do {
-      newIndex = Math.floor(Math.random() * 2) + 1; // Adjust to generate 1, 2, or 3
+      newIndex = Math.floor(Math.random() * 1) + 1; // Adjust to generate 1, 2, or 3
     } while (previousIndices.includes(newIndex));
 
     setPreviousIndices((prev) => {
       const newPrev = [...prev, newIndex];
-      return newPrev.length === 2 ? [] : newPrev;
+      return newPrev.length === 1 ? [] : newPrev;
     });
 
     return newIndex;
@@ -118,7 +118,6 @@ export default function App() {
     // `Hello, eager thinker! Ready to explore assumptions in arguments? Choose your preferred area:\nA) Political debates\nB) Scientific claims\nC) Everyday conversations.\nType A, B, or C to begin our Socratic journey!`,
     // `Greetings, perspective explorer! Ready to uncover hidden assumptions? Pick a topic:\n1) Environmental policies\n2) Economic theories\n3) Social media trends.\nReply with 1, 2, or 3 to start our contrasting viewpoints adventure!`,
     // `Hi there, real-world thinker! Ready to spot assumptions in daily life? Choose your focus:\nX) Personal relationships\nY) Professional decisions\nZ) Media consumption.\nRespond with X, Y, or Z to begin!`,
-    `Hey there! Welcome to the Human Centered Design Tutor. Let's get started!`,
     `Hey there! Welcome to the Human Centered Design Tutor. Let's get started!`,
   ];
 
@@ -148,8 +147,6 @@ Tenth, guide the student to consider prototyping methods for their AI design imp
 After completing these steps, offer the student choices for next steps, such as reviewing their project plan, getting tips on their chosen method, or exploring a different AI research question. Encourage them to reflect on their choices and the potential impact of their research.
 Throughout the process, remind the student that this is an iterative journey. Encourage questions, creative thinking, and reflection on how their research can lead to meaningful improvements in human-AI interactions.
 Make sure to redirect off-track responses and keep progressing through the plan until they have completed all steps. That said, always encourage people to provide their own creative input and innovative ideas at each stage. If the conversation veers off course, gently guide it back to the current step while acknowledging and incorporating any valuable insights the student has shared.`,
-
-    `You are a AI tutor specialized to help user in Human Centered AI Design Research`,
   ];
 
   const selectedOpeningLine =
