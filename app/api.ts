@@ -7,7 +7,7 @@ export async function submitResponse(data: UserResponseProps): Promise<any> {
   const api: string = process.env.NEXT_PUBLIC_MONGODB_API || "";
 
   try {
-    const res = await axios.post(api + "/path", data);
+    const res = await axios.post(api, data);
 
     return res.data; // Assuming you want to return the response data
   } catch (error: any) {
