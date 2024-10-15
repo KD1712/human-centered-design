@@ -27,7 +27,7 @@ export default function Progress1({
   const [experienceDescription, setExperienceDescription] = useState("");
 
   useEffect(() => {
-    // console.log(userResponse);
+    console.log(userResponse);
 
     const logInitialData = async () => {
       await submitResponse(userResponse);
