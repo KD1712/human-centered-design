@@ -152,7 +152,7 @@ export default function Progress2({
     };
 
     setLoading(true);
-    console.log(updatedResponse);
+    // console.log(updatedResponse);
     await submitResponse(updatedResponse);
     setLoading(false);
     onNext();

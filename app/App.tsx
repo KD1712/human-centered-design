@@ -12,6 +12,9 @@ import { v4 as uuidv4 } from "uuid";
 import { getFormattedTimestamp } from "./helper function/timestamp";
 import Progress8 from "./Progress8";
 import { submitResponse } from "./api";
+// import { Random } from "random-js";
+// const random = new Random();
+import random from "random";
 
 export interface Message {
   type: string;
@@ -78,12 +81,82 @@ export default function App() {
     }
   }, []);
 
-  useEffect(() => {
-    if (currentProgress === 1) {
-      // console.log(userResponse);
-      // await submitResponse(userResponse);
-    }
-  }, [currentProgress]);
+  // useEffect(() => {
+  //   if (currentProgress === 1) {
+  //     // console.log(userResponse);
+  //     // await submitResponse(userResponse);
+  //   }
+  // }, [currentProgress]);
+
+  // useEffect(() => {
+  //   const logMultipleRequests = async () => {
+  //     if (currentProgress === 1) {
+  //       try {
+  //         const requests = [];
+
+  //         // Loop 5 times to create 5 API calls
+  //         for (let i = 0; i < 1; i++) {
+  //           requests.push(
+  //             submitResponse({
+  //               sessionId: uuidv4(),
+  //               checkprobability: Math.floor(Math.random() * 2) + 1,
+  //             })
+  //           ); // Assuming submitResponse is a promise
+  //         }
+  //         console.log(requests);
+  //         // Wait for all 5 requests to finish
+  //         await Promise.all(requests);
+  //         console.log("5 API calls completed successfully");
+  //       } catch (error) {
+  //         console.error("Error in one or more requests:", error);
+  //       }
+  //     }
+  //   };
+
+  //   logMultipleRequests();
+  // }, [currentProgress]);
+
+  // useEffect(() => {
+  //   const logMultipleRequests = async () => {
+  //     if (currentProgress === 1) {
+  //       const requests = [];
+
+  //       // Loop 20 times to create 20 API calls
+  //       for (let i = 0; i < 100; i++) {
+  //         // const value = random.integer(1, 2);
+  //         const value = random.int(1, 2);
+
+  //         requests.push({
+  //           // ...userResponse,
+  //           // checkprobability: Math.floor(Math.random() * 2) + 1,
+  //           checkprobability: value,
+  //         });
+  //       }
+
+  //       try {
+  //         // Wait for all 20 requests to finish (assuming submitResponse is a promise)
+  //         await Promise.all(requests);
+  //         console.log(requests);
+  //         console.log("20 API calls completed");
+
+  //         // Count the occurrences of each value in the requests array
+  //         const counts = requests.reduce(
+  //           (acc: Record<number, number>, { checkprobability }) => {
+  //             acc[checkprobability] = (acc[checkprobability] || 0) + 1;
+  //             return acc;
+  //           },
+  //           {}
+  //         );
+
+  //         console.log("Counts of distinct values:", counts);
+  //       } catch (error) {
+  //         console.error("Error in one or more requests:", error);
+  //       }
+  //     }
+  //   };
+
+  //   logMultipleRequests();
+  // }, [currentProgress, userResponse]);
 
   const handleNext = () => {
     if (currentProgress === 9) {
@@ -95,16 +168,16 @@ export default function App() {
 
   const generateUniqueRandomIndex = (): number => {
     let newIndex: number;
-    do {
-      newIndex = Math.floor(Math.random() * 1) + 1; // Adjust to generate 1, 2, or 3
-    } while (previousIndices.includes(newIndex));
+    // do {
+    return (newIndex = Math.floor(Math.random() * 1) + 1); // Adjust to generate 1, 2, or 3
+    // } while (previousIndices.includes(newIndex));
 
-    setPreviousIndices((prev) => {
-      const newPrev = [...prev, newIndex];
-      return newPrev.length === 1 ? [] : newPrev;
-    });
+    // setPreviousIndices((prev) => {
+    //   const newPrev = [...prev, newIndex];
+    //   return newPrev.length === 2 ? [] : newPrev;
+    // });
 
-    return newIndex;
+    // return newIndex;
   };
 
   const updateUserResponse = (updatedResponse: any) => {

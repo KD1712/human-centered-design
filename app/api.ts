@@ -3,7 +3,7 @@
 import axios from "axios";
 import { UserResponseProps } from "./App";
 
-export async function submitResponse(data: UserResponseProps): Promise<any> {
+export async function submitResponse(data: any): Promise<any> {
   const api: string = process.env.NEXT_PUBLIC_MONGODB_API || "";
 
   try {
