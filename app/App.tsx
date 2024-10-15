@@ -169,7 +169,7 @@ export default function App() {
   const generateUniqueRandomIndex = (): number => {
     let newIndex: number;
     // do {
-    return (newIndex = Math.floor(Math.random() * 1) + 1); // Adjust to generate 1, 2, or 3
+    return (newIndex = Math.floor(Math.random() * 2) + 1); // Adjust to generate 1, 2, or 3
     // } while (previousIndices.includes(newIndex));
 
     // setPreviousIndices((prev) => {
@@ -191,6 +191,7 @@ export default function App() {
     // `Hello, eager thinker! Ready to explore assumptions in arguments? Choose your preferred area:\nA) Political debates\nB) Scientific claims\nC) Everyday conversations.\nType A, B, or C to begin our Socratic journey!`,
     // `Greetings, perspective explorer! Ready to uncover hidden assumptions? Pick a topic:\n1) Environmental policies\n2) Economic theories\n3) Social media trends.\nReply with 1, 2, or 3 to start our contrasting viewpoints adventure!`,
     // `Hi there, real-world thinker! Ready to spot assumptions in daily life? Choose your focus:\nX) Personal relationships\nY) Professional decisions\nZ) Media consumption.\nRespond with X, Y, or Z to begin!`,
+    `Hey there! Welcome to the Human Centered Design Tutor. Let's get started!`,
     `Hey there! Welcome to the Human Centered Design Tutor. Let's get started!`,
   ];
 
@@ -220,6 +221,9 @@ Tenth, guide the student to consider prototyping methods for their AI design imp
 After completing these steps, offer the student choices for next steps, such as reviewing their project plan, getting tips on their chosen method, or exploring a different AI research question. Encourage them to reflect on their choices and the potential impact of their research.
 Throughout the process, remind the student that this is an iterative journey. Encourage questions, creative thinking, and reflection on how their research can lead to meaningful improvements in human-AI interactions.
 Make sure to redirect off-track responses and keep progressing through the plan until they have completed all steps. That said, always encourage people to provide their own creative input and innovative ideas at each stage. If the conversation veers off course, gently guide it back to the current step while acknowledging and incorporating any valuable insights the student has shared.`,
+
+    `Please help me explore my scientific interests and then help me write a research paper. First, welcome me with meaningful emoji and "This is a tutor to help you learn how to conduct research on generative AI in education and in the workplace." and ask me
+ “tell me about your own research interests. What are you working on or what are some topics you might be interested in researching?” Use meaningful emoji in your response. Wait for my response and then discuss some ways that generative AI is expected to change teaching, learning, design practice, business practice, etc. then brainstorm six ideas related to my interests and describe how it might relate to the use of generative AI or generative ai in design or in education. Use creative and meaningful emoji to represent ideas. Ask me to pick any that resonate with me or to clarify my research interests. Wait for my response. Based on my response, brainstorm 6 interesting research opportunities to explore in a numbered list, with an emphasis on generative ai. Use creative and meaningful emoji. Then ask me to pick one or to clarify. Wait for my response. Based on my response, brainstorm a numbered list of titles of research papers. Wait for my response. Based on my response, suggest 4 different methods (use meaningful emoji). Ask me to pick one. Based on my response, write an abstract. Ask if I’d like to make any changes or wish to simulate the data or wish to start drafting the paper. Wait for my response. Based on my response, write a detailed outline for the rest of the paper. Ask me to type ‘continue.” Wait for my response. Based on my response, continue to write the next section. In the literature review, look up all sources and provide accurate references in APA format. Write one section at a time and then ask me to type “continue” to proceed.`,
   ];
 
   const selectedOpeningLine =
@@ -232,7 +236,7 @@ Make sure to redirect off-track responses and keep progressing through the plan 
         <div className="w-full max-w-[850px] mx-auto flex flex-col justify-center h-[calc(100vh-2rem)]">
           <Card className="flex flex-col  overflow-hidden">
             <CardHeader className="bg-blue-400 font-bold text-white text-2xl">
-              Human Centered Design
+              Human Centered Design Research
             </CardHeader>
             <CardBody className="w-full flex-grow overflow-y-auto">
               {currentProgress === 1 && (
@@ -245,15 +249,6 @@ Make sure to redirect off-track responses and keep progressing through the plan 
                 />
               )}
               {currentProgress === 2 && (
-                <Progress2
-                  onNext={handleNext}
-                  openingLine={selectedOpeningLine}
-                  prompts={selectedPrompts}
-                  userResponse={userResponse}
-                  updateUserResponse={updateUserResponse}
-                />
-              )}
-              {currentProgress === 3 && (
                 <Progress3
                   onNext={handleNext}
                   openingLine={selectedOpeningLine}
@@ -262,7 +257,7 @@ Make sure to redirect off-track responses and keep progressing through the plan 
                   updateUserResponse={updateUserResponse}
                 />
               )}
-              {currentProgress === 4 && (
+              {currentProgress === 3 && (
                 <Progress4
                   onNext={handleNext}
                   openingLine={selectedOpeningLine}
@@ -271,7 +266,7 @@ Make sure to redirect off-track responses and keep progressing through the plan 
                   updateUserResponse={updateUserResponse}
                 />
               )}
-              {currentProgress === 5 && (
+              {currentProgress === 4 && (
                 <Progress5
                   onNext={handleNext}
                   openingLine={selectedOpeningLine}
@@ -280,8 +275,17 @@ Make sure to redirect off-track responses and keep progressing through the plan 
                   updateUserResponse={updateUserResponse}
                 />
               )}
-              {currentProgress === 6 && (
+              {currentProgress === 5 && (
                 <Progress8
+                  onNext={handleNext}
+                  openingLine={selectedOpeningLine}
+                  prompts={selectedPrompts}
+                  userResponse={userResponse}
+                  updateUserResponse={updateUserResponse}
+                />
+              )}
+              {currentProgress === 6 && (
+                <Progress6
                   onNext={handleNext}
                   openingLine={selectedOpeningLine}
                   prompts={selectedPrompts}
@@ -318,11 +322,11 @@ Make sure to redirect off-track responses and keep progressing through the plan 
               )} */}
             </CardBody>
           </Card>
-          {currentProgress !== 6 && (
+          {currentProgress !== 5 && (
             <div className="flex flex-row items-center mt-2 rounded-none border-transparent w-full bg-transparent text-[#6d6d6d] gap-2 text-xs md:text-sm lg:text-base">
               <span className="material-symbols-outlined">info</span>
               <p className="text-sm md:text-sm lg:text-base">
-                Progress: {currentProgress}/6
+                Progress: {currentProgress}/5
               </p>
             </div>
           )}

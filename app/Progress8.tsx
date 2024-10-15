@@ -22,7 +22,7 @@ export default function Progress8({
 }: Progress8Props) {
   return (
     <div>
-      <p>Thank You</p>
+      <p>Thank you for your participation!</p>
     </div>
   );
 }

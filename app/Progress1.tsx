@@ -59,7 +59,7 @@ export default function Progress1({
   return (
     <div className="flex flex-col gap-2 p-1 md:p-1 lg:p-1 w-full">
       <p className="font-semibold text-lg md:text-xl lg:text-2xl ">
-        Welcome to the Human Centered Design Tutor
+        Welcome to the Human Centered Design Research Tutor
       </p>
       <div className="flex flex-col gap-4 text-sm md:text-base lg:text-lg">
         <div className="flex flex-col gap-2">
@@ -108,7 +108,7 @@ export default function Progress1({
             onChange={(e) => setDegreeProgram(e.target.value)}
           />
         </div>
-        <div className="flex flex-col gap-2">
+        {/* <div className="flex flex-col gap-2">
           <label>
             Have you had any prior experience with AI design research?
           </label>
@@ -136,10 +136,10 @@ export default function Progress1({
               No
             </label>
           </div>
-        </div>
+        </div> */}
         <div className="flex flex-col gap-2">
           <label htmlFor="experienceDescription">
-            If yes, briefly describe your experience:
+            What is your prior experience with AI?
           </label>
           <textarea
             id="experienceDescription"
