@@ -238,7 +238,7 @@ export default function Progress5({
         },
       ],
     };
-    console.log(updatedResponse);
+    // console.log(updatedResponse);
 
     setLoading(true);
     await submitResponse(updatedResponse);
